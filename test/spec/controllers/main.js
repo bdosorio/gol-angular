@@ -5,14 +5,24 @@ describe('Controller: MainCtrl', function () {
     // load the controller's module
     beforeEach(module('golAngularApp.controllers'));
 
+    // set up the state
+    beforeEach(module(function ($stateProvider) {
+        $stateProvider
+            .state('main', {})
+            .state('main.game', {});
+    }));
+
     var MainCtrl,
-        scope;
+        scope, state;
 
     // Initialize the controller and a mock scope
-    beforeEach(inject(function ($controller, $rootScope) {
+    beforeEach(inject(function ($controller, $rootScope, $injector) {
         scope = $rootScope.$new();
+        state = $injector.get('$state');
+        state.current.name = 'main';
         MainCtrl = $controller('MainCtrl', {
-            $scope: scope
+            $scope: scope,
+            $state: state
         });
     }));
 
@@ -24,12 +34,45 @@ describe('Controller: MainCtrl', function () {
     it("should have a method to generate a game", function () {
         expect(scope.cellList.length).toBe(0);
         expect(scope.generate).toBeDefined();
-
+        expect(state.current.name).toBe('main');
         scope.generate();
+        scope.$digest();
 
         expect(scope.cellList.length).not.toBe(0);
-        expect(scope.cellList[0].id).toBeTruthy();
-        expect(scope.cellList[0].x).toBeTruthy();
-        expect(scope.cellList[0].y).toBeTruthy();
+        expect(state.current.name).toBe('main.game');
+    });
+
+    it("should have a method to generate a cell", function () {
+        expect(scope.generateRandomCell).toBeDefined();
+
+        var cell = scope.generateRandomCell();
+
+        expect(cell.x).toBeDefined();
+        expect(cell.y).toBeDefined();
+        expect(cell.id).toBeDefined();
+        expect(cell.age).toBeDefined();
+        expect(cell.value).toBeDefined();
+    });
+
+    it("should have a method to add a cell to the list", function () {
+        expect(scope.addCell).toBeDefined();
+
+        var cell = scope.generateRandomCell();
+        scope.addCell(cell);
+
+        expect(scope.cellList[0]).toBe(cell);
+
+    });
+
+    it("should have a method to determine if a cell exists at a grid position", function () {
+        expect(scope.cellAt).toBeDefined();
+
+        scope.addCell({
+            x: 1,
+            y: 1
+        });
+        var isCellAt = scope.cellAt(scope.cellList[0].x, scope.cellList[0].y);
+
+        expect(isCellAt).toBeTruthy();
     });
 });
