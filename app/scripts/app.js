@@ -1,6 +1,6 @@
 'use strict';
-angular.module('golAngularApp.util',[]);
-angular.module('golAngularApp.controllers', []);
+angular.module('golAngularApp.util', []);
+angular.module('golAngularApp.controllers', ['ui.router']);
 angular.module('golAngularApp', [
 
         'golAngularApp.util',
@@ -12,6 +12,8 @@ angular.module('golAngularApp', [
         'ui.bootstrap'
     ])
     .config(function ($stateProvider, $urlRouterProvider) {
+        //empty
+        $urlRouterProvider.when('', '/');
         // For any unmatched url, send to /route1
         $urlRouterProvider.otherwise('/404');
 
@@ -20,6 +22,10 @@ angular.module('golAngularApp', [
                 url: '/',
                 controller: 'MainCtrl',
                 templateUrl: 'views/main.html'
+            })
+            .state('main.game', {
+                url: '/game',
+                templateUrl: 'views/game.html'
             })
             .state('404', {
                 url: '/404',
