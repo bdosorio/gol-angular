@@ -26,6 +26,7 @@ describe('Controller: MainCtrl', function () {
         });
     }));
 
+
     it('should have a list of cells', function () {
         expect(scope.cellList).toBeDefined();
         expect(scope.cellList.length).toBe(0);
@@ -75,4 +76,15 @@ describe('Controller: MainCtrl', function () {
 
         expect(isCellAt).toBeTruthy();
     });
+
+    describe('will have a step method that', function () {
+        it('should do nothing with an empty list', function () {
+            expect(scope.step).toBeDefined();
+
+            scope.cellList = [];
+            scope.step();
+            expect(scope.cellList.length).toBe(0);
+        });
+    });
+
 });
