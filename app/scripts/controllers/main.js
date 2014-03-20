@@ -41,4 +41,5 @@ angular.module('golAngularApp.controllers')
         $scope.addCell = function (cell) {
             $scope.cellList.push(cell);
         };
+        $scope.step = function(){};
     });
