@@ -1,3 +1,4 @@
+"use strict";
 //copied from http://stackoverflow.com/a/14932395
 angular.module('golAngularApp.util').filter('makeRange', function() {
     return function(input) {
