@@ -1,34 +1,33 @@
-<div class="row">
+<div class="col-md-5">
 
-    <div class="col-md-5">
+    <button type="button" class="btn btn-primary" ng-click="generate()">Generate</button>
+    <button type="button" class="btn btn-primary" ng-click="step()">Step</button>
 
-        <button type="button" class="btn btn-primary" ng-click="generate()">Generate</button>
-        <table class="table table-striped" style="max-height:400px; overflow:auto">
-            <thead>
-            <tr>
-                <th>ID</th>
-                <th>X</th>
-                <th>Y</th>
-                <th>Age</th>
-                <th>Value</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr ng-repeat="cell in cellList">
-                <td>{{cell.id}}</td>
-                <td>{{cell.x}}</td>
-                <td>{{cell.y}}</td>
-                <td>{{cell.age}}</td>
-                <td>{{cell.value}}</td>
-            </tr>
-            <tr ng-if="!cellList.length">
-                <td colspan="5">No Cells</td>
-            </tr>
-            </tbody>
-        </table>
+    <table class="table table-striped" style="max-height:400px; overflow:auto">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>X</th>
+            <th>Y</th>
+            <th>Age</th>
+            <th>Value</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="cell in cellList">
+            <td>{{cell.id}}</td>
+            <td>{{cell.x}}</td>
+            <td>{{cell.y}}</td>
+            <td>{{cell.age}}</td>
+            <td>{{cell.value}}</td>
+        </tr>
+        <tr ng-if="!cellList.length">
+            <td colspan="5">No Cells</td>
+        </tr>
+        </tbody>
+    </table>
 
-    </div>
-    <div class="col-md-5">
-        <div ui-view></div>
-    </div>
+</div>
+<div class="col-md-5">
+    <div ui-view></div>
 </div>
