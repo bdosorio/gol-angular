@@ -13,13 +13,12 @@ angular.module('golAngularApp', [
     ])
     .config(function ($stateProvider, $urlRouterProvider) {
         //empty
-        $urlRouterProvider.when('', '/');
         // For any unmatched url, send to /route1
         $urlRouterProvider.otherwise('/404');
 
         $stateProvider
             .state('main', {
-                url: '/',
+                url: '',
                 controller: 'MainCtrl',
                 templateUrl: 'views/main.html'
             })
