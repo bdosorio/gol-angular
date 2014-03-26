@@ -1,33 +1,45 @@
-<div class="col-md-5">
-
+<div class="col-md-2">
     <button type="button" class="btn btn-primary" ng-click="generate()">Generate</button>
     <button type="button" class="btn btn-primary" ng-click="step()">Step</button>
-
-    <table class="table table-striped" style="max-height:400px; overflow:auto">
-        <thead>
-        <tr>
-            <th>ID</th>
-            <th>X</th>
-            <th>Y</th>
-            <th>Age</th>
-            <th>Value</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="cell in cellList">
-            <td>{{cell.id}}</td>
-            <td>{{cell.x}}</td>
-            <td>{{cell.y}}</td>
-            <td>{{cell.age}}</td>
-            <td>{{cell.value}}</td>
-        </tr>
-        <tr ng-if="!cellList.length">
-            <td colspan="5">No Cells</td>
-        </tr>
-        </tbody>
-    </table>
-
+    <button type="button" class="btn btn-primary" ng-click="clear()">Clear</button>
 </div>
-<div class="col-md-5">
+
+<div class="col-md-4">
     <div ui-view></div>
+</div>
+
+<div class="col-md-6">
+    <div class="table-header">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th class="num-column">ID</th>
+                <th class="num-column">X</th>
+                <th class="num-column">Y</th>
+                <th class="num-column">DrawX</th>
+                <th class="num-column">DrawY</th>
+                <th class="num-column">Age</th>
+                <th>Value</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="table-body">
+        <table class="table table-striped">
+            <tbody>
+            <tr ng-repeat="cell in cellList">
+                <td class="num-column">{{cell.id}}</td>
+                <td class="num-column">{{cell.x}}</td>
+                <td class="num-column">{{cell.y}}</td>
+                <td class="num-column">{{cell.drawX}}</td>
+                <td class="num-column">{{cell.drawY}}</td>
+                <td class="num-column">{{cell.age}}</td>
+                <td>{{cell.value}}</td>
+            </tr>
+            <tr ng-if="!cellList.length">
+                <td colspan="5">No Cells</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
