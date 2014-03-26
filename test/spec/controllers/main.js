@@ -83,47 +83,56 @@ describe('Controller: MainCtrl', function () {
         expect(isCellAt).toBeTruthy();
     });
 
+    it('should have a method to gather a list of dead cells surrounding a cell', function () {
+        expect(scope.findDeadNeighbors).toBeDefined();
+        expect(_).toBeDefined();
+
+        scope.addCell(topLeft);
+        scope.addCell(topRight);
+        scope.addCell(bottomRight);
+        scope.addCell(bottomLeft);
+
+        var deadNeighbors = scope.findDeadNeighbors(cell);
+        expect(deadNeighbors.length).toBe(4);
+        expect(_.where(deadNeighbors, {x: top.x, y: top.y}).length).toBe(1);
+    });
     it('should have a method to determine the neighbor count of a cell', function () {
-        expect(scope.neighborCount).toBeDefined();
+        expect(scope.findNeighborCount).toBeDefined();
 
 
         scope.addCell(cell);
-        expect(scope.neighborCount(cell)).toBe(0);
+        expect(scope.findNeighborCount(cell)).toBe(0);
 
         scope.addCell(topLeft);
-        expect(scope.neighborCount(cell)).toBe(1);
+        expect(scope.findNeighborCount(cell)).toBe(1);
 
         scope.addCell(top);
-        expect(scope.neighborCount(cell)).toBe(2);
+        expect(scope.findNeighborCount(cell)).toBe(2);
 
         scope.addCell(topRight);
-        expect(scope.neighborCount(cell)).toBe(3);
+        expect(scope.findNeighborCount(cell)).toBe(3);
 
         scope.addCell(left);
-        expect(scope.neighborCount(cell)).toBe(4);
+        expect(scope.findNeighborCount(cell)).toBe(4);
 
         scope.addCell(right);
-        expect(scope.neighborCount(cell)).toBe(5);
+        expect(scope.findNeighborCount(cell)).toBe(5);
 
         scope.addCell(bottomLeft);
-        expect(scope.neighborCount(cell)).toBe(6);
+        expect(scope.findNeighborCount(cell)).toBe(6);
 
         scope.addCell(bottom);
-        expect(scope.neighborCount(cell)).toBe(7);
+        expect(scope.findNeighborCount(cell)).toBe(7);
 
         scope.addCell(bottomRight);
-        expect(scope.neighborCount(cell)).toBe(8);
+        expect(scope.findNeighborCount(cell)).toBe(8);
+    });
+
+    it('should have findNeighborCount that takes only uses count of deadCells if sent as a parameter', function () {
+        expect(scope.findNeighborCount({}, 2)).toBe(6);
     });
 
     describe('will have a step method that', function () {
-        beforeEach(function () {
-            scope.keepRange = {
-                start: 2,
-                end: 3
-            };
-        });
-
-
         it('should do nothing with an empty list', function () {
             expect(scope.step).toBeDefined();
 
@@ -141,16 +150,17 @@ describe('Controller: MainCtrl', function () {
             expect(scope.cellAt(cell.x, cell.y)).toBeFalsy();
         });
 
-        it('should keep cells alive if in keep range', function () {
+        it('should keep cells alive if in keep range and increase their age', function () {
             scope.addCell(topRight);
             scope.addCell(top);
             scope.addCell(cell);
 
-            scope.step();
 
-            expect(scope.cellAt(topRight.x, topRight.y)).toBeTruthy();
-            expect(scope.cellAt(top.x, top.y)).toBeTruthy();
-            expect(scope.cellAt(cell.x, cell.y)).toBeTruthy();
+            scope.step();
+            var cellAt = scope.cellAt(cell.x, cell.y);
+            expect(cellAt).toBeTruthy();
+            expect(cellAt.age).toBe(1);
+
         });
 
         it('should keep cells alive if over keep range', function () {
@@ -164,6 +174,26 @@ describe('Controller: MainCtrl', function () {
 
             expect(scope.cellAt(cell.x, cell.y)).toBeFalsy();
         });
+
+        it('should add a new cell if a dead cell borders parentsForBirth live cells', function () {
+            expect(scope.settings.parentsForBirth).toBeDefined();
+            scope.addCell(topRight);
+            scope.addCell(top);
+            scope.addCell(cell);
+
+
+            scope.step();
+
+            expect(scope.cellAt(right.x, right.y)).toBeTruthy();
+        });
+    });
+
+    it('should have a method to clear the game', function () {
+        expect(scope.clear).toBeDefined();
+
+        scope.clear();
+
+        expect(scope.cellList.length).toBe(0);
     });
 
 })
