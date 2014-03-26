@@ -1,8 +1,13 @@
-<svg ng-attr-height="{{'100%'}}" ng-attr-width="{{'100%'}}" style="border:1px solid black">
+<svg ng-attr-height="{{'400'}}" ng-attr-width="{{'400'}}" style="border:1px solid black">
+    <rect height="100%" width="100%" fill="#000" x="0" y="0"></rect>
     <circle ng-repeat="cell in cellList"
-            ng-attr-cx="{{cell.x}}"
-            ng-attr-cy="{{cell.y}}"
-            ng-attr-r="{{'1%'}}"
-            ng-attr-fill="{{'black'}}">
+            ng-attr-cx="{{cell.drawX}}"
+            ng-attr-cy="{{cell.drawY}}"
+            ng-attr-r="{{settings.drawRadius}}"
+            ng-attr-fill="{{settings.fillColor}}"
+            ng-attr-stroke="{{settings.strokeColor}}"
+            ng-attr-stroke-width="{{settings.strokeWidth}}"
+            ng-attr-opacity="{{settings.opacity}}"
+            ng-attr-id="{{cell.id}}">
     </circle>
 </svg>
