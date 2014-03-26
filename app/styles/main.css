@@ -79,8 +79,12 @@ body {
 }
 
 .table-body {
-    max-height: 450px;
+    max-height: 375px;
     width: 100%;
     margin: 0;
     overflow-y: auto;
+}
+
+.num-column{
+    width:5em;
 }
