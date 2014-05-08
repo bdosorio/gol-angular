@@ -135,7 +135,7 @@ angular.module('golAngularApp.controllers')
                 x: Math.floor(clickEvent.offsetX / (2 * $scope.settings.drawRadius )),
                 y: Math.floor(clickEvent.offsetY / (2 * $scope.settings.drawRadius)),
                 value: {
-                    mutation: $scope.generateRandomNumber(0, MAX_MUTATION),
+                    mutation: $scope.generateRandomNumber(0, MAX_MUTATION)
                 }
             };
             console.log("Adding:");
