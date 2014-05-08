@@ -1,10 +1,10 @@
-<svg ng-attr-height="{{'400'}}" ng-attr-width="{{'400'}}" style="border:1px solid black">
+<svg ng-attr-height="{{settings.drawRadius * settings.boardHeight}}" ng-attr-width="{{settings.drawRadius * settings.boardWidth}}" style="border:1px solid black" ng-click="svgClickHandler($event)">
     <rect height="100%" width="100%" fill="#000" x="0" y="0"></rect>
     <circle ng-repeat="cell in cellList"
             ng-attr-cx="{{cell.drawX}}"
             ng-attr-cy="{{cell.drawY}}"
             ng-attr-r="{{settings.drawRadius}}"
-            ng-attr-fill="{{settings.fillColor}}"
+            ng-attr-fill="rgb({{256 - cell.id}}, {{256-cell.age}}, {{256-cell.value.mutation}})"
             ng-attr-stroke="{{settings.strokeColor}}"
             ng-attr-stroke-width="{{settings.strokeWidth}}"
             ng-attr-opacity="{{settings.opacity}}"
