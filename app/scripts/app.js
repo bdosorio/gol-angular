@@ -12,7 +12,6 @@ angular.module('golAngularApp', [
         'ui.bootstrap'
     ])
     .config(function ($stateProvider, $urlRouterProvider) {
-        //empty
         // For any unmatched url, send to /route1
         $urlRouterProvider.otherwise('/404');
 
